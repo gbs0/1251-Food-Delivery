@@ -37,7 +37,7 @@ class Router
 
   def dispatch_rider(rider_choice)
     # TODO
-    puts "Dispath rider action... #{rider_choice}"  
+    puts "Dispath rider action... #{rider_choice}" 
   end
 
   def print_menu

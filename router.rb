@@ -41,9 +41,7 @@ class Router
   end
 
   def print_menu
-    puts "------------------------------"
-    puts "------------ MENU ------------"
-    puts "------------------------------"
+    puts "------------ MENU ------------"  
     puts "Choose an action to start with:"
     puts "1 - Create new Meal"
     puts "2 - List Meal(s)"

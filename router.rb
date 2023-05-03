@@ -1,8 +1,9 @@
 class Router
-  def initialize(meals_controller, customers_controller, sessions_controller)
+  def initialize(meals_controller, customers_controller, sessions_controller, orders_controller)
     @meals_controller = meals_controller
     @customers_controller = customers_controller
     @sessions_controller = sessions_controller
+    @orders_controller = orders_controller
   end
 
   def start
@@ -13,7 +14,7 @@ class Router
         dispatch_manager(user_choice)
       else
         rider_choice = print_rider_menu
-        dispatch_rider(rider_choice)
+        dispatch_rider(rider_choice, employee)
       end
     end
   end
@@ -28,6 +29,10 @@ class Router
         @customers_controller.add
     when 4
         @customers_controller.list
+    when 5
+        @orders_controller.add
+    when 6
+        @orders_controller.list
     when 9
         exit
     else
@@ -35,9 +40,17 @@ class Router
     end  
   end
 
-  def dispatch_rider(rider_choice)
-    # TODO
-    puts "Dispath rider action... #{rider_choice}" 
+  def dispatch_rider(rider_choice, employee)
+    case rider_choice
+    when 1
+      @orders_controller.list_undelivered_orders
+    when 2
+      @orders_controller.mark_order_as_delivered(employee)
+    when 9
+      exit
+    else
+      puts "Invalid Option! Try again"
+    end
   end
 
   def print_menu
@@ -48,6 +61,9 @@ class Router
     puts "--------- CUSTOMER -----------"
     puts "3 - Create new Customer"
     puts "4 - List all Customer(s)"
+    puts "--------- CUSTOMER -----------"
+    puts "5 - Create new Order"
+    puts "6 - List Order(s)"
     puts "9 - Quit"
     print "> "
     gets.chomp.to_i
@@ -57,7 +73,9 @@ class Router
     puts "------------------------------"
     puts "------------ MENU ------------"
     puts "------------------------------"
-    puts "TO-DO: List all Rider actions!"
+    puts "1. - List all Undelivered Orders"
+    puts "2. - Mark Order as Delivered!"
+    puts "9. - Quit!"
     print "> "
     gets.chomp.to_i
   end
